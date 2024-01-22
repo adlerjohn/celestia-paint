@@ -1,0 +1,31 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.item-title {
+    padding: 12px;
+    font-size: 20px;
+
+    background: #F2F2F6;
+}
+
+.item-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+    padding: 16px;
+}
+
+input {
+    margin: 0;
+    border: 1px solid #09090A;
+    border-radius: 0.5rem;
+
+    padding: 0.75rem 0.75rem;
+}
