@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { getKeplrFromWindow } from "./util/getKeplrFromWindow";
 import { OsmosisChainInfo } from "./constants";
-import { Balances } from "./types/balance";
 import { Dec, DecUtils } from "@keplr-wallet/unit";
 import { sendMsgs } from "./util/sendMsgs";
-import { api } from "./util/api";
 import { simulateMsgs } from "./util/simulateMsgs";
 import { MsgSend } from "./proto-types-gen/src/cosmos/bank/v1beta1/tx";
 import "./styles/container.css";
@@ -44,7 +42,7 @@ function App() {
           toAddress: key.bech32Address,
           amount: [
             {
-              denom: "uosmo",
+              denom: "utia",
               amount: DecUtils.getTenExponentN(6).mul(new Dec(0)).truncate().toString(),
             },
           ],
@@ -57,7 +55,7 @@ function App() {
           key.bech32Address,
           [protoMsgs],
           [{
-            denom: "uosmo",
+            denom: "utia",
             amount: "236",
           }]
         );
@@ -70,7 +68,7 @@ function App() {
             [protoMsgs],
             {
               amount: [{
-                denom: "uosmo",
+                denom: "utia",
                 amount: "236",
               }],
               gas: Math.floor(gasUsed * 1.5).toString(),
