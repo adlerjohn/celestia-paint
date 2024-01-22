@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { getKeplrFromWindow } from "./util/getKeplrFromWindow";
-import { OsmosisChainInfo } from "./constants";
+import { CelestiaChainInfo } from "./constants";
 import { Dec, DecUtils } from "@keplr-wallet/unit";
 import { sendMsgs } from "./util/sendMsgs";
 import { simulateMsgs } from "./util/simulateMsgs";
@@ -23,7 +23,7 @@ function App() {
 
     if (keplr) {
       try {
-        await keplr.experimentalSuggestChain(OsmosisChainInfo);
+        await keplr.experimentalSuggestChain(CelestiaChainInfo);
       } catch (e) {
         if (e instanceof Error) {
           console.log(e.message);
@@ -34,7 +34,7 @@ function App() {
 
   const submitPixel = async () => {
     if (window.keplr) {
-      const key = await window.keplr.getKey(OsmosisChainInfo.chainId);
+      const key = await window.keplr.getKey(CelestiaChainInfo.chainId);
       const protoMsgs = {
         typeUrl: "/cosmos.bank.v1beta1.MsgSend",
         value: MsgSend.encode({
@@ -51,7 +51,7 @@ function App() {
 
       try {
         const gasUsed = await simulateMsgs(
-          OsmosisChainInfo,
+          CelestiaChainInfo,
           key.bech32Address,
           [protoMsgs],
           [{
@@ -63,7 +63,7 @@ function App() {
         if (gasUsed) {
           await sendMsgs(
             window.keplr,
-            OsmosisChainInfo,
+            CelestiaChainInfo,
             key.bech32Address,
             [protoMsgs],
             {
