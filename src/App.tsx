@@ -43,6 +43,8 @@ function App() {
     return [
       { x: 0, y: 0, color: "#FF0000" },
       { x: 1, y: 0, color: "#00FF00" },
+      { x: 0, y: 1, color: "#0000FF" },
+      { x: 1, y: 1, color: "#FFFF00" },
       // ... more data
     ];
   };
@@ -101,6 +103,22 @@ function App() {
         <h1>🎨 Celestia Paint</h1>
       </div>
 
+      <div className="pixel-art-container">
+        {pixels.map((pixel, index) => (
+          <div
+            key={index}
+            style={{
+              position: "absolute",
+              left: `${pixel.x * 10}px`,
+              top: `${pixel.y * 10}px`,
+              width: "10px",
+              height: "10px",
+              backgroundColor: pixel.color,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="item">
         <div className="item-title">Change Pixel</div>
 
@@ -152,22 +170,7 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="pixel-art-container">
-        {pixels.map((pixel, index) => (
-          <div
-            key={index}
-            style={{
-              position: "absolute",
-              left: `${pixel.x * 10}px`,
-              top: `${pixel.y * 10}px`,
-              width: "10px",
-              height: "10px",
-              backgroundColor: pixel.color,
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    </div >
   );
 }
 
