@@ -1,18 +1,19 @@
-export const OsmosisChainInfo = {
+export const CelestiaChainInfo = {
   // Chain-id of the Osmosis chain.
-  chainId: "osmo-test-5",
+  chainId: "mocha-4",
   // The name of the chain to be displayed to the user.
-  chainName: "Osmosis Testnet",
+  chainName: "Celestia Mocha Testnet",
   // RPC endpoint of the chain. In this case we are using blockapsis, as it's accepts connections from any host currently. No Cors limitations.
-  rpc: "https://rpc.osmotest5.osmosis.zone",
+  rpc: "https://rpc.celestia-mocha.com/",
   // REST endpoint of the chain.
-  rest: "https://lcd.osmotest5.osmosis.zone",
+  rest: "https://api.celestia-mocha.com/",
+
   // Staking coin information
   stakeCurrency: {
     // Coin denomination to be displayed to the user.
-    coinDenom: "OSMO",
+    coinDenom: "TIA",
     // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-    coinMinimalDenom: "uosmo",
+    coinMinimalDenom: "utia",
     // # of decimal points to convert minimal denomination to user-facing denomination.
     coinDecimals: 6,
     // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -39,20 +40,20 @@ export const OsmosisChainInfo = {
   //   bech32PrefixConsPub: string;
   // }
   bech32Config: {
-    bech32PrefixAccAddr: "osmo",
-    bech32PrefixAccPub: "osmopub",
-    bech32PrefixValAddr: "osmovaloper",
-    bech32PrefixValPub: "osmovaloperpub",
-    bech32PrefixConsAddr: "osmovalcons",
-    bech32PrefixConsPub: "osmovalconspub",
+    bech32PrefixAccAddr: "celestia",
+    bech32PrefixAccPub: "celestiapub",
+    bech32PrefixValAddr: "celestiavaloper",
+    bech32PrefixValPub: "celestiavaloperpub",
+    bech32PrefixConsAddr: "celestiavalcons",
+    bech32PrefixConsPub: "celestiavalconspub",
   },
   // List of all coin/tokens used in this chain.
   currencies: [
     {
       // Coin denomination to be displayed to the user.
-      coinDenom: "OSMO",
+      coinDenom: "TIA",
       // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-      coinMinimalDenom: "uosmo",
+      coinMinimalDenom: "utia",
       // # of decimal points to convert minimal denomination to user-facing denomination.
       coinDecimals: 6,
       // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -64,9 +65,9 @@ export const OsmosisChainInfo = {
   feeCurrencies: [
     {
       // Coin denomination to be displayed to the user.
-      coinDenom: "OSMO",
+      coinDenom: "TIA",
       // Actual denom (i.e. uosmo, uscrt) used by the blockchain.
-      coinMinimalDenom: "uosmo",
+      coinMinimalDenom: "utia",
       // # of decimal points to convert minimal denomination to user-facing denomination.
       coinDecimals: 6,
       // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -83,4 +84,4 @@ export const OsmosisChainInfo = {
       },
     },
   ],
-}
+};
