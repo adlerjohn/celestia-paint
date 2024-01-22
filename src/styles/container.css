@@ -19,4 +19,5 @@
 
 .pixel-art-container {
     min-height: 64px;
+    container-type: size;
 }
