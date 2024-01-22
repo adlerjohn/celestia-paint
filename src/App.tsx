@@ -73,7 +73,7 @@ function App() {
               }],
               gas: Math.floor(gasUsed * 1.5).toString(),
             },
-            pixel_color,)
+            pixel_x + "," + pixel_y + "," + pixel_color,)
         }
       } catch (e) {
         if (e instanceof Error) {
