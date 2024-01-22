@@ -39,7 +39,7 @@ function App() {
         typeUrl: "/cosmos.bank.v1beta1.MsgSend",
         value: MsgSend.encode({
           fromAddress: key.bech32Address,
-          toAddress: key.bech32Address,
+          toAddress: "celestia1anqth8kzlkjup240eyxpw9xd9f9lzrxvjtlm3x",
           amount: [
             {
               denom: "utia",
@@ -72,7 +72,8 @@ function App() {
                 amount: "236",
               }],
               gas: Math.floor(gasUsed * 1.5).toString(),
-            })
+            },
+            pixel_color,)
         }
       } catch (e) {
         if (e instanceof Error) {

@@ -1,17 +1,17 @@
-import {ChainInfo} from "@keplr-wallet/types";
-import {Any} from "../proto-types-gen/src/google/protobuf/any";
-import {AuthInfo, Fee, SignerInfo, TxBody, TxRaw} from "../proto-types-gen/src/cosmos/tx/v1beta1/tx";
-import {SignMode} from "../proto-types-gen/src/cosmos/tx/signing/v1beta1/signing";
-import {fetchAccountInfo} from "./sendMsgs";
-import {api} from "./api";
-import {GasSimulateResponse} from "../types/simulate";
-import {OsmosisChainInfo} from "../constants";
+import { ChainInfo } from "@keplr-wallet/types";
+import { Any } from "../proto-types-gen/src/google/protobuf/any";
+import { AuthInfo, Fee, SignerInfo, TxBody, TxRaw } from "../proto-types-gen/src/cosmos/tx/v1beta1/tx";
+import { SignMode } from "../proto-types-gen/src/cosmos/tx/signing/v1beta1/signing";
+import { fetchAccountInfo } from "./sendMsgs";
+import { api } from "./api";
+import { GasSimulateResponse } from "../types/simulate";
+import { CelestiaChainInfo } from "../constants";
 
 export const simulateMsgs = async (
   chainInfo: ChainInfo,
   sender: string,
   proto: Any[],
-  fee:  [{
+  fee: [{
     denom: string;
     amount: string;
   }],
@@ -19,8 +19,8 @@ export const simulateMsgs = async (
 ) => {
   const account = await fetchAccountInfo(chainInfo, sender);
 
-  if(account) {
-    const unsignedTx =TxRaw.encode( {
+  if (account) {
+    const unsignedTx = TxRaw.encode({
       bodyBytes: TxBody.encode(
         TxBody.fromPartial({
           messages: proto,
@@ -56,7 +56,7 @@ export const simulateMsgs = async (
       signatures: [new Uint8Array(64)],
     }).finish()
 
-    const simulatedResult = await api<GasSimulateResponse>(`${OsmosisChainInfo.rest}/cosmos/tx/v1beta1/simulate`, {
+    const simulatedResult = await api<GasSimulateResponse>(`${CelestiaChainInfo.rest}/cosmos/tx/v1beta1/simulate`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
