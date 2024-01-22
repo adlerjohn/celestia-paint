@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getKeplrFromWindow } from "./util/getKeplrFromWindow";
 import { CelestiaChainInfo } from "./constants";
-import { Dec, DecUtils } from "@keplr-wallet/unit";
 import { sendMsgs } from "./util/sendMsgs";
-import { simulateMsgs } from "./util/simulateMsgs";
 import { MsgSend } from "./proto-types-gen/src/cosmos/bank/v1beta1/tx";
 import "./styles/container.css";
 import "./styles/button.css";
@@ -13,9 +11,11 @@ function App() {
   const [pixel_x, setPixelX] = React.useState<string>("");
   const [pixel_y, setPixelY] = React.useState<string>("");
   const [pixel_color, setPixelColor] = React.useState<string>("");
+  const [pixels, setPixels] = useState<PixelData[]>([]); // Add this line
 
   useEffect(() => {
     init();
+    fetchPixelData().then((data) => setPixels(data)); // Fetch pixel data on mount
   }, []);
 
   const init = async () => {
@@ -30,6 +30,21 @@ function App() {
         }
       }
     }
+  };
+
+  type PixelData = {
+    x: number;
+    y: number;
+    color: string;
+  };
+
+  const fetchPixelData = async (): Promise<PixelData[]> => {
+    // Replace this with your actual fetch call
+    return [
+      { x: 0, y: 0, color: "#FF0000" },
+      { x: 1, y: 0, color: "#00FF00" },
+      // ... more data
+    ];
   };
 
   const submitPixel = async () => {
@@ -50,18 +65,6 @@ function App() {
       };
 
       try {
-        // const gasUsed = true;
-        // const gasUsed = await simulateMsgs(
-        //   CelestiaChainInfo,
-        //   key.bech32Address,
-        //   [protoMsgs],
-        //   [{
-        //     denom: "utia",
-        //     amount: "236",
-        //   }]
-        // );
-
-        // if (gasUsed) {
         await sendMsgs(
           window.keplr,
           CelestiaChainInfo,
@@ -78,7 +81,6 @@ function App() {
           },
           pixel_x + "," + pixel_y + "," + pixel_color
         );
-        // }
       } catch (e) {
         if (e instanceof Error) {
           console.log(e.message);
@@ -149,6 +151,21 @@ function App() {
             Send
           </button>
         </div>
+      </div>
+      <div className="pixel-art-container">
+        {pixels.map((pixel, index) => (
+          <div
+            key={index}
+            style={{
+              position: "absolute",
+              left: `${pixel.x * 10}px`,
+              top: `${pixel.y * 10}px`,
+              width: "10px",
+              height: "10px",
+              backgroundColor: pixel.color,
+            }}
+          />
+        ))}
       </div>
     </div>
   );
