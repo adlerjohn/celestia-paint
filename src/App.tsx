@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { getKeplrFromWindow } from "./util/getKeplrFromWindow";
 import { CelestiaChainInfo } from "./constants";
 import { Dec, DecUtils } from "@keplr-wallet/unit";
@@ -10,9 +10,9 @@ import "./styles/button.css";
 import "./styles/item.css";
 
 function App() {
-  const [pixel_x, setPixelX] = React.useState<string>('');
-  const [pixel_y, setPixelY] = React.useState<string>('');
-  const [pixel_color, setPixelColor] = React.useState<string>('');
+  const [pixel_x, setPixelX] = React.useState<string>("");
+  const [pixel_y, setPixelY] = React.useState<string>("");
+  const [pixel_color, setPixelColor] = React.useState<string>("");
 
   useEffect(() => {
     init();
@@ -30,7 +30,7 @@ function App() {
         }
       }
     }
-  }
+  };
 
   const submitPixel = async () => {
     if (window.keplr) {
@@ -43,91 +43,112 @@ function App() {
           amount: [
             {
               denom: "utia",
-              amount: DecUtils.getTenExponentN(6).mul(new Dec(0)).truncate().toString(),
+              amount: "10000",
             },
           ],
         }).finish(),
-      }
+      };
 
       try {
-        const gasUsed = await simulateMsgs(
+        // const gasUsed = true;
+        // const gasUsed = await simulateMsgs(
+        //   CelestiaChainInfo,
+        //   key.bech32Address,
+        //   [protoMsgs],
+        //   [{
+        //     denom: "utia",
+        //     amount: "236",
+        //   }]
+        // );
+
+        // if (gasUsed) {
+        await sendMsgs(
+          window.keplr,
           CelestiaChainInfo,
           key.bech32Address,
           [protoMsgs],
-          [{
-            denom: "utia",
-            amount: "236",
-          }]
-        );
-
-        if (gasUsed) {
-          await sendMsgs(
-            window.keplr,
-            CelestiaChainInfo,
-            key.bech32Address,
-            [protoMsgs],
-            {
-              amount: [{
+          {
+            amount: [
+              {
                 denom: "utia",
                 amount: "236",
-              }],
-              gas: Math.floor(gasUsed * 1.5).toString(),
-            },
-            pixel_x + "," + pixel_y + "," + pixel_color,)
-        }
+              },
+            ],
+            gas: Math.floor(230000 * 1.5).toString(),
+          },
+          pixel_x + "," + pixel_y + "," + pixel_color
+        );
+        // }
       } catch (e) {
         if (e instanceof Error) {
           console.log(e.message);
         }
       }
-
     }
-  }
-
+  };
 
   return (
     <div className="root-container">
-      <div style={{
-        display: "flex",
-        justifyContent: "center",
-        padding: "16px"
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "16px",
+        }}
+      >
         <h1>🎨 Celestia Paint</h1>
       </div>
 
       <div className="item">
-        <div className="item-title">
-          Change Pixel
-        </div>
+        <div className="item-title">Change Pixel</div>
 
         <div className="item-content">
-          <div style={{
-            display: "flex",
-            flexDirection: "column"
-          }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             X:
-            <input type="text" value={pixel_x} onChange={(e) => setPixelX(e.target.value)} />
+            <input
+              type="text"
+              value={pixel_x}
+              onChange={(e) => setPixelX(e.target.value)}
+            />
           </div>
 
-          <div style={{
-            display: "flex",
-            flexDirection: "column"
-          }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             Y:
-            <input type="text" value={pixel_y} onChange={(e) => setPixelY(e.target.value)} />
+            <input
+              type="text"
+              value={pixel_y}
+              onChange={(e) => setPixelY(e.target.value)}
+            />
           </div>
 
-          <div style={{
-            display: "flex",
-            flexDirection: "column"
-          }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             Color:
-            <input type="text" value={pixel_color} onChange={(e) => setPixelColor(e.target.value)} />
+            <input
+              type="text"
+              value={pixel_color}
+              onChange={(e) => setPixelColor(e.target.value)}
+            />
           </div>
 
-          <button className="keplr-button" onClick={submitPixel}>Send</button>
+          <button className="keplr-button" onClick={submitPixel}>
+            Send
+          </button>
         </div>
-
       </div>
     </div>
   );
